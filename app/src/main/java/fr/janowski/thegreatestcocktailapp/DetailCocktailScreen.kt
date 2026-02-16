@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -74,8 +76,11 @@ fun DetailCocktailScreen(modifier: Modifier) {
             )
         ))
             .fillMaxSize()) {
-        Column(modifier = modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+            modifier = modifier.fillMaxWidth()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(10.dp),) {
             Image(
                 painterResource(R.drawable.cocktail),
                 "",
@@ -101,6 +106,27 @@ fun DetailCocktailScreen(modifier: Modifier) {
 //                Text("Non alcoholic")
                 CategoryView(Category.OTHER)
                 CategoryView(Category.NON_ALCOHOLIC)
+            }
+            Text(
+                "Cocktail glass",
+                color = colorResource(R.color.grey)
+            ) // Kind of glass
+            Card() {
+                Column(
+                    Modifier.padding(16.dp)
+                        .fillMaxWidth()) {
+                    Text(stringResource(R.string.igrendient))
+                    Text("Coca-cola")
+                    Text("Lemon juice")
+                }
+            }
+            Card() {
+                Column(
+                    Modifier.padding(16.dp)
+                        .fillMaxWidth()) {
+                    Text(stringResource(R.string.preparation))
+                    Text("Take a glass, pourthe coke in the glass, then you take 7 drops of lemon juice")
+                }
             }
         }
     }
