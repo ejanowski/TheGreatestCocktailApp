@@ -32,10 +32,13 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import fr.janowski.thegreatestcocktailapp.screens.BottomAppBar
 import fr.janowski.thegreatestcocktailapp.screens.CategoriesScreen
 import fr.janowski.thegreatestcocktailapp.screens.DetailCocktailScreen
+import fr.janowski.thegreatestcocktailapp.screens.FavoritesScreen
 import fr.janowski.thegreatestcocktailapp.ui.theme.TheGreatestCocktailAppTheme
 
 data class TabBarItem(
@@ -62,7 +65,7 @@ class MainActivity : ComponentActivity() {
                 Icons.Filled.Menu,
                 Icons.Outlined.Menu
             )
-            var favoriteItem = TabBarItem(
+            val favoriteItem = TabBarItem(
                 stringResource(R.string.tab_item_favorite),
                 Icons.Filled.Favorite,
                 Icons.Outlined.Favorite
@@ -90,8 +93,20 @@ class MainActivity : ComponentActivity() {
                     },
                     bottomBar = { BottomAppBar(tabItems, navController) }
                 ) { innerPadding ->
-                    CategoriesScreen(
-                        Modifier.padding(innerPadding))
+                    NavHost(navController, startDestination = randomItem.title) {
+                        composable(randomItem.title) {
+                            DetailCocktailScreen(
+                                Modifier.padding(innerPadding))
+                        }
+                        composable(categoryItem.title) {
+                            CategoriesScreen(
+                                Modifier.padding(innerPadding))
+                        }
+                        composable(favoriteItem.title) {
+                            FavoritesScreen(
+                                Modifier.padding(innerPadding))
+                        }
+                    }
                 }
             }
         }
