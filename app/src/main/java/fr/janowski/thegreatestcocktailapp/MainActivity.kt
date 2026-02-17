@@ -57,18 +57,8 @@ class MainActivity : ComponentActivity() {
 //                        name = "Android",
 //                        modifier = Modifier.padding(innerPadding)
 //                    )
-//                    CategoriesScreen(Modifier.padding(innerPadding)) {
-//                        val intent = Intent(context, DrinksActivity::class.java)
-//                        context.startActivity(intent)
-//                    }
                     CategoriesScreen(
-                        Modifier.padding(innerPadding),
-                        onCategoryClick =  { category ->
-                            Log.d("Category", category)
-                            val intent = Intent(context, DrinksActivity::class.java)
-                            context.startActivity(intent)
-                    })
-                    //DetailCocktailScreen(Modifier.padding(innerPadding))
+                        Modifier.padding(innerPadding))
                 }
             }
         }

@@ -1,5 +1,6 @@
 package fr.janowski.thegreatestcocktailapp.screens
 
+import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,9 +13,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import fr.janowski.thegreatestcocktailapp.DetailCocktailActivity
+import fr.janowski.thegreatestcocktailapp.DrinksActivity
 
 @Composable
-fun DrinksScreen(modifier: Modifier, onDrinkClick: (String) -> Unit) {
+fun DrinksScreen(modifier: Modifier) {
     val list = listOf( "Manathan", "Pina colada")
     val context = LocalContext.current
     LazyColumn(modifier
@@ -22,11 +25,8 @@ fun DrinksScreen(modifier: Modifier, onDrinkClick: (String) -> Unit) {
         verticalArrangement = Arrangement.spacedBy(8.dp)) {
         items(list){ drink ->
             Card(Modifier.clickable {
-                // Ugly way
-//                val activity = context as? ComponentActivity
-//                val intent = Intent(context, DrinksActivity::class.java)
-//                activity?.startActivity(intent)
-                onDrinkClick(drink)
+                val intent = Intent(context, DetailCocktailActivity::class.java)
+                context.startActivity(intent)
             }) {
                 Text("${drink}",
                     Modifier

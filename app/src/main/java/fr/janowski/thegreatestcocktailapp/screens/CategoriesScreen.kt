@@ -19,7 +19,7 @@ import fr.janowski.thegreatestcocktailapp.DrinksActivity
 import fr.janowski.thegreatestcocktailapp.models.Category
 
 @Composable
-fun CategoriesScreen(modifier: Modifier, onCategoryClick: (String) -> Unit) {
+fun CategoriesScreen(modifier: Modifier) {
     val list = listOf( "Beer", "Cocktail", "Coffe")
     val context = LocalContext.current
     LazyColumn(modifier
@@ -27,11 +27,8 @@ fun CategoriesScreen(modifier: Modifier, onCategoryClick: (String) -> Unit) {
         verticalArrangement = Arrangement.spacedBy(8.dp)) {
         items(list){ category ->
             Card(Modifier.clickable {
-                // Ugly way
-//                val activity = context as? ComponentActivity
-//                val intent = Intent(context, DrinksActivity::class.java)
-//                activity?.startActivity(intent)
-                onCategoryClick(category)
+                val intent = Intent(context, DrinksActivity::class.java)
+                context.startActivity(intent)
             }) {
                 Text("${category}",
                     Modifier

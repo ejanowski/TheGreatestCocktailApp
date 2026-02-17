@@ -24,10 +24,7 @@ class DrinksActivity : ComponentActivity() {
             val context = LocalContext.current
             TheGreatestCocktailAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    DrinksScreen(Modifier.padding(innerPadding)) { drinks ->
-                        val intent = Intent(context, DetailCocktailActivity::class.java)
-                        context.startActivity(intent)
-                    }
+                    DrinksScreen(Modifier.padding(innerPadding))
                 }
             }
         }
