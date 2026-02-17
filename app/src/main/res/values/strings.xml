@@ -2,4 +2,6 @@
     <string name="app_name">TheGreatestCocktailApp</string>
     <string name="igrendient">Ingredients</string>
     <string name="preparation">Préparation</string>
+    <string name="title_activity_drinks">DrinksActivity</string>
+    <string name="title_activity_detail_cocktail">DetailCocktailActivity</string>
 </resources>

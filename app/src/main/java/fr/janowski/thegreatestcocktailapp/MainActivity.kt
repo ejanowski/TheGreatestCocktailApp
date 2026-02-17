@@ -1,29 +1,30 @@
 package fr.janowski.thegreatestcocktailapp
 
+import android.content.Intent
+import android.graphics.drawable.Icon
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import fr.janowski.thegreatestcocktailapp.screens.CategoriesScreen
+import fr.janowski.thegreatestcocktailapp.screens.DetailCocktailScreen
 import fr.janowski.thegreatestcocktailapp.ui.theme.TheGreatestCocktailAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -32,37 +33,42 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val context = LocalContext.current
             TheGreatestCocktailAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize(),
                     topBar = {
-                        TopAppBar(
-                            colors = TopAppBarDefaults.topAppBarColors(
-                                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                                titleContentColor = MaterialTheme.colorScheme.primary,
-                            ),
-                            title = {
-                                Text(
-                                    "Centered Top App Bar",
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis
+                        TopAppBar({
+                            Text("Detail")
+                        }, actions = {
+                            IconButton({
+                                Toast
+                                    .makeText(context, "Add to favorite", Toast.LENGTH_LONG)
+                                    .show()
+                            }) {
+                                Icon(
+                                    imageVector = Icons.Filled.FavoriteBorder,
+                                    contentDescription = "Localized description"
                                 )
-                            },
-                            actions = {
-                                IconButton(onClick = {}) {
-                                    Icon(
-                                        imageVector = Icons.Filled.FavoriteBorder,
-                                        contentDescription = "Localized description"
-                                    )
-                                }
                             }
-                        )
-                    },
+                        })
+                    }
                 ) { innerPadding ->
 //                    Greeting(
 //                        name = "Android",
 //                        modifier = Modifier.padding(innerPadding)
 //                    )
-                    DetailCocktailScreen(Modifier.padding(innerPadding))
+//                    CategoriesScreen(Modifier.padding(innerPadding)) {
+//                        val intent = Intent(context, DrinksActivity::class.java)
+//                        context.startActivity(intent)
+//                    }
+                    CategoriesScreen(
+                        Modifier.padding(innerPadding),
+                        onCategoryClick =  { category ->
+                            Log.d("Category", category)
+                            val intent = Intent(context, DrinksActivity::class.java)
+                            context.startActivity(intent)
+                    })
+                    //DetailCocktailScreen(Modifier.padding(innerPadding))
                 }
             }
         }
