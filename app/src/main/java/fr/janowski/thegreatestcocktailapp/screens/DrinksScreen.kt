@@ -14,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import fr.janowski.thegreatestcocktailapp.DetailCocktailActivity
-import fr.janowski.thegreatestcocktailapp.DrinksActivity
 
 @Composable
 fun DrinksScreen(modifier: Modifier) {

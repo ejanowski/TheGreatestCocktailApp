@@ -1,8 +1,6 @@
 package fr.janowski.thegreatestcocktailapp.screens
 
 import android.content.Intent
-import android.util.Log
-import androidx.activity.ComponentActivity
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import fr.janowski.thegreatestcocktailapp.DrinksActivity
-import fr.janowski.thegreatestcocktailapp.models.Category
 
 @Composable
 fun CategoriesScreen(modifier: Modifier) {

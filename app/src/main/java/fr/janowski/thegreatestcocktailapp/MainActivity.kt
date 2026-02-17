@@ -1,9 +1,6 @@
 package fr.janowski.thegreatestcocktailapp
 
-import android.content.Intent
-import android.graphics.drawable.Icon
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,7 +16,6 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Menu
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
