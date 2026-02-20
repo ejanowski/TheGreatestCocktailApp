@@ -1,6 +1,7 @@
 package fr.janowski.thegreatestcocktailapp
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -47,6 +48,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        Log.d("LifeCycle", "MainActivity onCreate")
         setContent {
             val context = LocalContext.current
             val navController = rememberNavController()
@@ -107,25 +109,29 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Row(modifier = modifier) { // Horizontal Alignment
-        Text("Hello $name!")
-        Text("Hello Isen")
+    override fun onPause(){
+        super.onPause()
+        Log.d("LifeCycle", "MainActivity onPause")
     }
 
-//    Column(modifier = modifier) { /* Vertical Alignment */
-//        Text("Hello $name!")
-//        Text("Hello Isen")
-//    }
-}
+    override fun onResume(){
+        super.onResume()
+        Log.d("LifeCycle", "MainActivity onResume")
+    }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    TheGreatestCocktailAppTheme {
-        Greeting("Android")
+    override fun onStop(){
+        super.onStop()
+        Log.d("LifeCycle", "MainActivity onStop")
+    }
+
+    override fun onStart(){
+        super.onStart()
+        Log.d("LifeCycle", "MainActivity onStart")
+    }
+
+    override fun onRestart(){
+        super.onRestart()
+        Log.d("LifeCycle", "MainActivity onRestart")
     }
 }
