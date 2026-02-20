@@ -232,11 +232,16 @@ fun DetailCocktailTopButton(drink: Drink?) {
     val context = LocalContext.current
     val favoritesManager = FavoritesManager()
     drink?.let { drink ->
+        var isFavorites = remember {
+            mutableStateOf<Boolean>(favoritesManager.isFavorite(drink, context))
+        }
+
         IconButton({
             favoritesManager.toggleFavorite(drink, context)
+            isFavorites.value = favoritesManager.isFavorite(drink, context)
         }) {
             Icon(
-                imageVector = if (favoritesManager.isFavorite(drink, context)) {
+                imageVector = if (isFavorites.value) {
                     Icons.Filled.Favorite
                 } else {
                     Icons.Filled.FavoriteBorder
