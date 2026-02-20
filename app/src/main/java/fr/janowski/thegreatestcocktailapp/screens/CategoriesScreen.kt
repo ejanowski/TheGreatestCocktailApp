@@ -21,17 +21,20 @@ import fr.janowski.thegreatestcocktailapp.DrinksActivity
 import fr.janowski.thegreatestcocktailapp.dataClasses.CategoryListResponse
 import fr.janowski.thegreatestcocktailapp.dataClasses.CocktailResponse
 import fr.janowski.thegreatestcocktailapp.dataClasses.DrinkCategory
+import fr.janowski.thegreatestcocktailapp.models.AppBarState
 import fr.janowski.thegreatestcocktailapp.network.ApiClient
 import retrofit2.Call
 import retrofit2.Response
 
 @Composable
-fun CategoriesScreen(modifier: Modifier) {
-    val list = listOf( "Beer", "Cocktail", "Coffe")
+fun CategoriesScreen(modifier: Modifier, onComposing: (AppBarState) -> Unit) {
     val context = LocalContext.current
     var categories = remember { mutableStateOf<List<DrinkCategory>?>(null) }
 
     LaunchedEffect(Unit) {
+        onComposing(
+            AppBarState("Categories")
+        )
         val call = ApiClient.retrofit.getCategories()
         call.enqueue(object : retrofit2.Callback<CategoryListResponse> {
             override fun onResponse(

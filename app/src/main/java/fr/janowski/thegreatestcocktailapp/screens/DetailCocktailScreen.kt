@@ -1,6 +1,7 @@
 package fr.janowski.thegreatestcocktailapp.screens
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -16,7 +17,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -27,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -37,16 +43,21 @@ import coil3.compose.AsyncImage
 import fr.janowski.thegreatestcocktailapp.R
 import fr.janowski.thegreatestcocktailapp.dataClasses.CocktailResponse
 import fr.janowski.thegreatestcocktailapp.dataClasses.Drink
+import fr.janowski.thegreatestcocktailapp.models.AppBarState
 import fr.janowski.thegreatestcocktailapp.models.Category
 import fr.janowski.thegreatestcocktailapp.network.ApiClient
 import retrofit2.Call
 import retrofit2.Response
 
 @Composable
-fun RandomCocktailScreen(modifier: Modifier) {
+fun RandomCocktailScreen(modifier: Modifier, onComposing: (AppBarState) -> Unit) {
     var drink = remember { mutableStateOf<Drink?>(null) }
 
     LaunchedEffect(Unit) {
+        onComposing (
+            AppBarState("Random Cocktail",
+                actions = { DetailCocktailTopButton(drink.value) })
+        )
 //        drink.value = ApiClient.retrofit.getRandom().drinks?.first()
         val call = ApiClient.retrofit.getRandomCocktail()
         call.enqueue(object : retrofit2.Callback<CocktailResponse> {
@@ -206,6 +217,20 @@ fun DetailCocktailScreen(modifier: Modifier, drink: Drink) {
     }
 }
 
+@Composable
+fun DetailCocktailTopButton(drink: Drink?) {
+    val context = LocalContext.current
+    IconButton({
+        Toast
+            .makeText(context, "Add to favorite", Toast.LENGTH_LONG)
+            .show()
+    }) {
+        Icon(
+            imageVector = Icons.Filled.FavoriteBorder,
+            contentDescription = "Localized description"
+        )
+    }
+}
 
 @Composable
 fun CategoryView(catogory: Category) {
