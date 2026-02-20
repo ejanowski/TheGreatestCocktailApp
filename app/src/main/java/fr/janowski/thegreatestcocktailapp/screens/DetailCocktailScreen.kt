@@ -84,10 +84,17 @@ fun RandomCocktailScreen(modifier: Modifier, onComposing: (AppBarState) -> Unit)
 }
 
 @Composable
-fun DetailCocktailScreen(drinkId: String, modifier: Modifier) {
+fun DetailCocktailScreen(drinkId: String,
+                         onComposing: (AppBarState) -> Unit,
+                         modifier: Modifier) {
     var drink = remember { mutableStateOf<Drink?>(null) }
 
     LaunchedEffect(Unit) {
+
+        onComposing (
+            AppBarState("Random Cocktail",
+                actions = { DetailCocktailTopButton(drink.value) })
+        )
 //        drink.value = ApiClient.retrofit.getRandom().drinks?.first()
         val call = ApiClient.retrofit.getDetailCocktail(drinkId)
         call.enqueue(object : retrofit2.Callback<CocktailResponse> {
