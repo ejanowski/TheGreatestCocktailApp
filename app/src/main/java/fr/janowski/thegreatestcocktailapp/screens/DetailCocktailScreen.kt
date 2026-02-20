@@ -18,6 +18,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
@@ -40,9 +41,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import com.google.gson.Gson
 import fr.janowski.thegreatestcocktailapp.R
 import fr.janowski.thegreatestcocktailapp.dataClasses.CocktailResponse
 import fr.janowski.thegreatestcocktailapp.dataClasses.Drink
+import fr.janowski.thegreatestcocktailapp.managers.FavoritesManager
 import fr.janowski.thegreatestcocktailapp.models.AppBarState
 import fr.janowski.thegreatestcocktailapp.models.Category
 import fr.janowski.thegreatestcocktailapp.network.ApiClient
@@ -227,15 +230,20 @@ fun DetailCocktailScreen(modifier: Modifier, drink: Drink) {
 @Composable
 fun DetailCocktailTopButton(drink: Drink?) {
     val context = LocalContext.current
-    IconButton({
-        Toast
-            .makeText(context, "Add to favorite", Toast.LENGTH_LONG)
-            .show()
-    }) {
-        Icon(
-            imageVector = Icons.Filled.FavoriteBorder,
-            contentDescription = "Localized description"
-        )
+    val favoritesManager = FavoritesManager()
+    drink?.let { drink ->
+        IconButton({
+            favoritesManager.toggleFavorite(drink, context)
+        }) {
+            Icon(
+                imageVector = if (favoritesManager.isFavorite(drink, context)) {
+                    Icons.Filled.Favorite
+                } else {
+                    Icons.Filled.FavoriteBorder
+                },
+                contentDescription = "Localized description"
+            )
+        }
     }
 }
 
