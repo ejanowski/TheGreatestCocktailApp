@@ -14,13 +14,18 @@ import fr.janowski.thegreatestcocktailapp.ui.theme.TheGreatestCocktailAppTheme
 class DetailCocktailActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val drinkId = intent.getStringExtra(DRINKID) ?: ""
         enableEdgeToEdge()
         setContent {
             TheGreatestCocktailAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    DetailCocktailScreen(Modifier.padding(innerPadding))
+                    DetailCocktailScreen(drinkId, Modifier.padding(innerPadding))
                 }
             }
         }
+    }
+
+    companion object {
+        const val DRINKID = "drinkid"
     }
 }

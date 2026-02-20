@@ -34,7 +34,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import fr.janowski.thegreatestcocktailapp.screens.BottomAppBar
 import fr.janowski.thegreatestcocktailapp.screens.CategoriesScreen
-import fr.janowski.thegreatestcocktailapp.screens.DetailCocktailScreen
+import fr.janowski.thegreatestcocktailapp.screens.RandomCocktailScreen
 import fr.janowski.thegreatestcocktailapp.screens.FavoritesScreen
 import fr.janowski.thegreatestcocktailapp.ui.theme.TheGreatestCocktailAppTheme
 
@@ -93,7 +93,7 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
                     NavHost(navController, startDestination = randomItem.title) {
                         composable(randomItem.title) {
-                            DetailCocktailScreen(
+                            RandomCocktailScreen(
                                 Modifier.padding(innerPadding))
                         }
                         composable(categoryItem.title) {
